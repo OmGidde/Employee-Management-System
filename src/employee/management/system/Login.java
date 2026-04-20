@@ -1,95 +1,94 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package employee.management.system;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Image;
-import java.awt.LayoutManager;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 public class Login extends JFrame implements ActionListener {
+
     JTextField tusername;
     JPasswordField tpassword;
-    JButton login;
-    JButton back;
+    JButton login, back;
 
-    Login() {
+    Login(){
+
         JLabel username = new JLabel("Username");
-        username.setBounds(40, 20, 100, 30);
-        this.add(username);
-        this.tusername = new JTextField();
-        this.tusername.setBounds(150, 20, 150, 30);
-        this.add(this.tusername);
+        username.setBounds(40,20,100,30);
+        add(username);
+
+        tusername = new JTextField();
+        tusername.setBounds(150,20,150,30);
+        add(tusername);
+
         JLabel password = new JLabel("Password");
-        password.setBounds(40, 70, 100, 30);
-        this.add(password);
-        this.tpassword = new JPasswordField();
-        this.tpassword.setBounds(150, 70, 150, 30);
-        this.add(this.tpassword);
-        this.login = new JButton("LOGIN");
-        this.login.setBounds(150, 140, 150, 30);
-        this.login.setBackground(Color.black);
-        this.login.setForeground(Color.WHITE);
-        this.login.addActionListener(this);
-        this.add(this.login);
-        this.back = new JButton("BACK");
-        this.back.setBounds(150, 180, 150, 30);
-        this.back.setBackground(Color.black);
-        this.back.setForeground(Color.WHITE);
-        this.back.addActionListener(this);
-        this.add(this.back);
+        password.setBounds(40,70,100,30);
+        add(password);
+
+        tpassword = new JPasswordField();
+        tpassword.setBounds(150,70,150,30);
+        add(tpassword);
+
+        login = new JButton("LOGIN");
+        login.setBounds(150,140,150,30);
+        login.setBackground(Color.black);
+        login.setForeground(Color.WHITE);
+        login.addActionListener(this);
+        add(login);
+
+        back = new JButton("BACK");
+        back.setBounds(150,180,150,30);
+        back.setBackground(Color.black);
+        back.setForeground(Color.WHITE);
+        back.addActionListener(this);
+        add(back);
+
         ImageIcon i11 = new ImageIcon(ClassLoader.getSystemResource("icons/second.jpg"));
-        Image i22 = i11.getImage().getScaledInstance(600, 400, 1);
+        Image i22 = i11.getImage().getScaledInstance(600,400,Image.SCALE_DEFAULT);
         ImageIcon i33 = new ImageIcon(i22);
         JLabel imgg = new JLabel(i33);
-        imgg.setBounds(350, 10, 600, 400);
-        this.add(imgg);
+        imgg.setBounds(350,10,600,400);
+        add(imgg);
+
+
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/LoginB.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(600, 300, 1);
+        Image i2 = i1.getImage().getScaledInstance(600,300,Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel img = new JLabel(i3);
-        img.setBounds(0, 0, 600, 300);
-        this.add(img);
-        this.setSize(600, 300);
-        this.setLocation(450, 200);
-        this.setLayout((LayoutManager)null);
-        this.setVisible(true);
+        img.setBounds(0,0,600,300);
+        add(img);
+
+        setSize(600,300);
+        setLocation(450,200);
+        setLayout(null);
+        setVisible(true);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.login) {
+        if (e.getSource() == login){
             try {
-                String username = this.tusername.getText();
-                String password = this.tpassword.getText();
+                String username = tusername.getText();
+                String password = tpassword.getText();
+
                 conn conn = new conn();
-                String query = "select * from login where username = '" + username + "' and password = '" + password + "'";
+                String query = "select * from login where username = '"+ username +"' and password = '"+password+"'";
                 ResultSet resultSet = conn.statement.executeQuery(query);
-                if (resultSet.next()) {
-                    this.setVisible(false);
+                if (resultSet.next()){
+                    setVisible(false);
                     new Main_class();
-                } else {
-                    JOptionPane.showMessageDialog((Component)null, "Invalid username or password");
+                }else {
+                    JOptionPane.showMessageDialog(null,"Invalid username or password");
                 }
-            } catch (Exception E) {
+
+            }catch (Exception E){
                 E.printStackTrace();
             }
-        } else if (e.getSource() == this.back) {
+
+        } else if (e.getSource() == back) {
             System.exit(90);
         }
-
     }
 
     public static void main(String[] args) {
